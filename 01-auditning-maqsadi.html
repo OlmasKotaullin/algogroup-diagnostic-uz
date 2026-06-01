@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Auditning maqsadi — Algo Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#f97316;--accent-light:#fff7ed;--accent-border:#fed7aa;
+  --text:#0f172a;--text2:#475569;--text3:#94a3b8;
+  --border:#e2e8f0;--bg:#f8fafc;--bg-card:#ffffff;
+}
+html,body{height:100%}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);background:var(--bg);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
+a:hover{border-bottom-color:var(--accent)}
+strong{font-weight:700}
+
+.layout{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+@media (max-width:900px){.layout{grid-template-columns:1fr}}
+
+/* ── Sidebar ── */
+.sidebar{background:var(--text);color:#fff;padding:2rem 1.5rem;position:sticky;top:0;height:100vh;overflow-y:auto;max-height:100vh}
+@media (max-width:900px){.sidebar{position:relative;height:auto;max-height:none}}
+.brand{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;font-weight:600}
+.brand-name{font-size:1.6rem;font-weight:800;line-height:1.2;margin-bottom:.3rem}
+.brand-name span{color:var(--accent)}
+.brand-sub{font-size:.8rem;color:#94a3b8;margin-bottom:2rem}
+.nav{display:flex;flex-direction:column;gap:.15rem}
+.nav-item{display:flex;gap:.65rem;align-items:flex-start;padding:.65rem .85rem;border-radius:8px;color:#cbd5e1;font-size:.85rem;line-height:1.4;transition:all .15s;border-bottom:none}
+.nav-item:hover{background:rgba(255,255,255,.05);color:#fff;border-bottom:none}
+.nav-item.active{background:var(--accent);color:#fff;font-weight:600}
+.nav-num{font-family:'Fira Code',monospace;font-size:.7rem;opacity:.7;flex-shrink:0;margin-top:.15rem;min-width:1.5rem}
+.nav-text{flex:1}
+
+/* ── Main ── */
+.main{padding:3rem 3.5rem;max-width:980px}
+@media (max-width:1100px){.main{padding:2rem 1.5rem}}
+.section-meta{font-size:.78rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:.7rem;font-family:'Fira Code',monospace}
+.section-title{font-size:2.1rem;font-weight:800;line-height:1.2;color:var(--text);margin-bottom:2.5rem;letter-spacing:-.02em}
+@media (max-width:700px){.section-title{font-size:1.6rem}}
+
+/* ── Typography ── */
+.content p{margin-bottom:1.1rem;color:var(--text);font-size:1rem;line-height:1.75}
+.content h2.h2{font-size:1.45rem;font-weight:800;color:var(--text);margin:2.2rem 0 1rem;padding-left:.85rem;border-left:4px solid var(--accent);line-height:1.3}
+.content h3.h3{font-size:1.1rem;font-weight:700;color:var(--text);margin:1.6rem 0 .75rem;line-height:1.35}
+.content ul.list{margin:0 0 1.3rem 0;padding-left:0;list-style:none}
+.content ul.list li{margin-bottom:.85rem;line-height:1.75;color:var(--text)}
+
+/* ── Blockquote (цитаты Алекса/Марии и т.п.) ── */
+.content blockquote.quote{margin:1.6rem 0;padding:1.1rem 1.4rem;border-left:3px solid var(--accent);background:#fafafa;border-radius:0 6px 6px 0}
+.content blockquote.quote p{margin:0 0 .5rem 0;font-style:italic;font-size:1.05rem;color:var(--text);line-height:1.6}
+.content blockquote.quote cite{display:block;font-style:normal;font-size:.88rem;color:var(--text-muted);font-weight:500}
+
+/* ── Tables ── */
+.tbl-wrap{overflow-x:auto;margin:1.5rem 0;border-radius:8px;border:1px solid var(--border);background:#fff}
+.tbl{width:100%;border-collapse:collapse;font-size:.92rem}
+.tbl th{background:var(--bg);text-align:left;padding:.85rem 1rem;font-weight:700;color:var(--text);border-bottom:2px solid var(--border)}
+.tbl td{padding:.75rem 1rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl p{margin-bottom:.3rem}
+.tbl p:last-child{margin-bottom:0}
+
+/* ── Pagination ── */
+.pagination{display:flex;justify-content:space-between;gap:1rem;margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border)}
+.page-link{flex:1;padding:1.1rem 1.4rem;background:var(--bg-card);border:1.5px solid var(--border);border-radius:10px;text-decoration:none;border-bottom:none;color:var(--text);transition:all .15s;max-width:48%}
+.page-link:hover{border-color:var(--accent);background:var(--accent-light);border-bottom:1.5px solid var(--accent)}
+.page-link.next{margin-left:auto;text-align:right}
+.page-link .pl-label{font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:.3rem;font-family:'Fira Code',monospace}
+.page-link .pl-title{font-size:.95rem;font-weight:700;color:var(--text);line-height:1.4}
+
+/* ── Footer ── */
+.foot{padding:2rem 0 0;color:var(--text3);font-size:.78rem;text-align:center;border-top:1px solid var(--border);margin-top:4rem}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand-name">Algo <span>Group</span></div>
+  <nav class="nav"><a class="nav-item" href="index.html"><span class="nav-num">00</span><span class="nav-text">Mundarija</span></a>
+<a class="nav-item active" href="01-auditning-maqsadi.html"><span class="nav-num">01</span><span class="nav-text">Auditning maqsadi</span></a>
+<a class="nav-item" href="02-biz-nimalar-qildik.html"><span class="nav-num">02</span><span class="nav-text">Biz nimalar qildik</span></a>
+<a class="nav-item" href="03-aqshdagi-eld-bozori-manzarasi-algo-group-qayerda.html"><span class="nav-num">03</span><span class="nav-text">AQShdagi ELD bozori manzarasi. Algo Group qayerda</span></a>
+<a class="nav-item" href="04-strategik-oynalar-algo-group-uchun-nima-foyda-va-n.html"><span class="nav-num">04</span><span class="nav-text">Strategik oynalar. ALGO GROUP uchun nima foyda va nima qarshi ishlaydi</span></a>
+<a class="nav-item" href="05-yo-nalishlar-bo-yicha-umumiy-dashboard.html"><span class="nav-num">05</span><span class="nav-text">Yo&#x27;nalishlar bo&#x27;yicha umumiy dashboard</span></a>
+<a class="nav-item" href="06-kanallar-iqtisodiyoti.html"><span class="nav-num">06</span><span class="nav-text">Kanallar iqtisodiyoti</span></a>
+<a class="nav-item" href="07-marketing-va-sotuvning-4-blokli-auditi.html"><span class="nav-num">07</span><span class="nav-text">Marketing va sotuvning 4 blokli auditi</span></a>
+<a class="nav-item" href="08-marketingning-yetuklik-xaritasi.html"><span class="nav-num">08</span><span class="nav-text">Marketingning yetuklik xaritasi</span></a>
+<a class="nav-item" href="09-1-blok-hozirgi-nuqta-bugun-nima-bor.html"><span class="nav-num">09</span><span class="nav-text">1-blok. hozirgi nuqta: bugun nima bor?</span></a>
+<a class="nav-item" href="10-2-blok-yo-nalishlar-va-odamlar-bo-yicha-muammolar-.html"><span class="nav-num">10</span><span class="nav-text">2-blok. yo&#x27;nalishlar va odamlar bo&#x27;yicha muammolar xaritasi</span></a>
+<a class="nav-item" href="11-3-blok-marketing-va-savdo-bog-lamasi-qayerda-sinad.html"><span class="nav-num">11</span><span class="nav-text">3-blok. «marketing va savdo» bog&#x27;lamasi qayerda sinadi</span></a>
+<a class="nav-item" href="12-umumiy-yakun-va-nima-qilish-kerak.html"><span class="nav-num">12</span><span class="nav-text">Umumiy yakun va nima qilish kerak?</span></a></nav>
+</aside>
+<main class="main">
+
+<div class="section-meta">Bo&#39;lim 01</div>
+<h1 class="section-title">Auditning maqsadi</h1>
+<div class="content">
+<p>Algo Group kompaniyasining tijorat blokini yaxlit ko&#x27;rib chiqish: jarayonlar, jamoa, infratuzilma, analitika. Sizning qayerda allaqachon kuchli bo&#x27;lganingizni va tayanish mumkin bo&#x27;lgan joylarni, qayerda tor joylar va zaifliklar borligini, o&#x27;sish uchun nima kritik ahamiyatga ega ekanini aniqlash.</p>
+<p>Masshtablashtirishdan oldin joriy quvvatlarning kesimi. Tizimli reklama (marketing) bo&#x27;limini nimaga asoslab qurishni tushunish. «Qanday chiqsa shunday qilamiz» qo&#x27;lda rejimidan boshqariladigan rejimga o&#x27;tish, bunda daromad (vyruchka) o&#x27;sishi oldindan aytsa bo&#x27;ladigan bo&#x27;ladi.</p>
+<p>Auditning vazifasi uch narsani ko&#x27;rsatish:</p>
+<p>1) Qaysi quvvatlarga allaqachon tayansa bo&#x27;ladi, qaysilari esa byudjetni yoqib yuboryapti.</p>
+<p>2) Mijozning reklamadan to&#x27;lovgacha bo&#x27;lgan yo&#x27;li qayerda uziladi.</p>
+<p>3) Qanday boshqaruv va jarayon tor joylari masshtablashtirishga to&#x27;sqinlik qilyapti.</p>
+</div>
+
+<nav class="pagination">
+<a class="page-link prev" href="index.html"><div class="pl-label">Oldingi</div><div class="pl-title">Mundarija</div></a>
+<a class="page-link next" href="02-biz-nimalar-qildik.html"><div class="pl-label">Keyingi</div><div class="pl-title">Biz nimalar qildik</div></a>
+</nav>
+</main>
+</div>
+</body>
+</html>

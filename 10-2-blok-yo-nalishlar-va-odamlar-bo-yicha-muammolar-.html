@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>2-BLOK. YO&#x27;NALISHLAR VA ODAMLAR BO&#x27;YICHA MUAMMOLAR XARITASI — Algo Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#f97316;--accent-light:#fff7ed;--accent-border:#fed7aa;
+  --text:#0f172a;--text2:#475569;--text3:#94a3b8;
+  --border:#e2e8f0;--bg:#f8fafc;--bg-card:#ffffff;
+}
+html,body{height:100%}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);background:var(--bg);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
+a:hover{border-bottom-color:var(--accent)}
+strong{font-weight:700}
+
+.layout{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+@media (max-width:900px){.layout{grid-template-columns:1fr}}
+
+/* ── Sidebar ── */
+.sidebar{background:var(--text);color:#fff;padding:2rem 1.5rem;position:sticky;top:0;height:100vh;overflow-y:auto;max-height:100vh}
+@media (max-width:900px){.sidebar{position:relative;height:auto;max-height:none}}
+.brand{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;font-weight:600}
+.brand-name{font-size:1.6rem;font-weight:800;line-height:1.2;margin-bottom:.3rem}
+.brand-name span{color:var(--accent)}
+.brand-sub{font-size:.8rem;color:#94a3b8;margin-bottom:2rem}
+.nav{display:flex;flex-direction:column;gap:.15rem}
+.nav-item{display:flex;gap:.65rem;align-items:flex-start;padding:.65rem .85rem;border-radius:8px;color:#cbd5e1;font-size:.85rem;line-height:1.4;transition:all .15s;border-bottom:none}
+.nav-item:hover{background:rgba(255,255,255,.05);color:#fff;border-bottom:none}
+.nav-item.active{background:var(--accent);color:#fff;font-weight:600}
+.nav-num{font-family:'Fira Code',monospace;font-size:.7rem;opacity:.7;flex-shrink:0;margin-top:.15rem;min-width:1.5rem}
+.nav-text{flex:1}
+
+/* ── Main ── */
+.main{padding:3rem 3.5rem;max-width:980px}
+@media (max-width:1100px){.main{padding:2rem 1.5rem}}
+.section-meta{font-size:.78rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:.7rem;font-family:'Fira Code',monospace}
+.section-title{font-size:2.1rem;font-weight:800;line-height:1.2;color:var(--text);margin-bottom:2.5rem;letter-spacing:-.02em}
+@media (max-width:700px){.section-title{font-size:1.6rem}}
+
+/* ── Typography ── */
+.content p{margin-bottom:1.1rem;color:var(--text);font-size:1rem;line-height:1.75}
+.content h2.h2{font-size:1.45rem;font-weight:800;color:var(--text);margin:2.2rem 0 1rem;padding-left:.85rem;border-left:4px solid var(--accent);line-height:1.3}
+.content h3.h3{font-size:1.1rem;font-weight:700;color:var(--text);margin:1.6rem 0 .75rem;line-height:1.35}
+.content ul.list{margin:0 0 1.3rem 0;padding-left:0;list-style:none}
+.content ul.list li{margin-bottom:.85rem;line-height:1.75;color:var(--text)}
+
+/* ── Blockquote (цитаты Алекса/Марии и т.п.) ── */
+.content blockquote.quote{margin:1.6rem 0;padding:1.1rem 1.4rem;border-left:3px solid var(--accent);background:#fafafa;border-radius:0 6px 6px 0}
+.content blockquote.quote p{margin:0 0 .5rem 0;font-style:italic;font-size:1.05rem;color:var(--text);line-height:1.6}
+.content blockquote.quote cite{display:block;font-style:normal;font-size:.88rem;color:var(--text-muted);font-weight:500}
+
+/* ── Tables ── */
+.tbl-wrap{overflow-x:auto;margin:1.5rem 0;border-radius:8px;border:1px solid var(--border);background:#fff}
+.tbl{width:100%;border-collapse:collapse;font-size:.92rem}
+.tbl th{background:var(--bg);text-align:left;padding:.85rem 1rem;font-weight:700;color:var(--text);border-bottom:2px solid var(--border)}
+.tbl td{padding:.75rem 1rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl p{margin-bottom:.3rem}
+.tbl p:last-child{margin-bottom:0}
+
+/* ── Pagination ── */
+.pagination{display:flex;justify-content:space-between;gap:1rem;margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border)}
+.page-link{flex:1;padding:1.1rem 1.4rem;background:var(--bg-card);border:1.5px solid var(--border);border-radius:10px;text-decoration:none;border-bottom:none;color:var(--text);transition:all .15s;max-width:48%}
+.page-link:hover{border-color:var(--accent);background:var(--accent-light);border-bottom:1.5px solid var(--accent)}
+.page-link.next{margin-left:auto;text-align:right}
+.page-link .pl-label{font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:.3rem;font-family:'Fira Code',monospace}
+.page-link .pl-title{font-size:.95rem;font-weight:700;color:var(--text);line-height:1.4}
+
+/* ── Footer ── */
+.foot{padding:2rem 0 0;color:var(--text3);font-size:.78rem;text-align:center;border-top:1px solid var(--border);margin-top:4rem}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand-name">Algo <span>Group</span></div>
+  <nav class="nav"><a class="nav-item" href="index.html"><span class="nav-num">00</span><span class="nav-text">Mundarija</span></a>
+<a class="nav-item" href="01-auditning-maqsadi.html"><span class="nav-num">01</span><span class="nav-text">Auditning maqsadi</span></a>
+<a class="nav-item" href="02-biz-nimalar-qildik.html"><span class="nav-num">02</span><span class="nav-text">Biz nimalar qildik</span></a>
+<a class="nav-item" href="03-aqshdagi-eld-bozori-manzarasi-algo-group-qayerda.html"><span class="nav-num">03</span><span class="nav-text">AQShdagi ELD bozori manzarasi. Algo Group qayerda</span></a>
+<a class="nav-item" href="04-strategik-oynalar-algo-group-uchun-nima-foyda-va-n.html"><span class="nav-num">04</span><span class="nav-text">Strategik oynalar. ALGO GROUP uchun nima foyda va nima qarshi ishlaydi</span></a>
+<a class="nav-item" href="05-yo-nalishlar-bo-yicha-umumiy-dashboard.html"><span class="nav-num">05</span><span class="nav-text">Yo&#x27;nalishlar bo&#x27;yicha umumiy dashboard</span></a>
+<a class="nav-item" href="06-kanallar-iqtisodiyoti.html"><span class="nav-num">06</span><span class="nav-text">Kanallar iqtisodiyoti</span></a>
+<a class="nav-item" href="07-marketing-va-sotuvning-4-blokli-auditi.html"><span class="nav-num">07</span><span class="nav-text">Marketing va sotuvning 4 blokli auditi</span></a>
+<a class="nav-item" href="08-marketingning-yetuklik-xaritasi.html"><span class="nav-num">08</span><span class="nav-text">Marketingning yetuklik xaritasi</span></a>
+<a class="nav-item" href="09-1-blok-hozirgi-nuqta-bugun-nima-bor.html"><span class="nav-num">09</span><span class="nav-text">1-blok. hozirgi nuqta: bugun nima bor?</span></a>
+<a class="nav-item active" href="10-2-blok-yo-nalishlar-va-odamlar-bo-yicha-muammolar-.html"><span class="nav-num">10</span><span class="nav-text">2-blok. yo&#x27;nalishlar va odamlar bo&#x27;yicha muammolar xaritasi</span></a>
+<a class="nav-item" href="11-3-blok-marketing-va-savdo-bog-lamasi-qayerda-sinad.html"><span class="nav-num">11</span><span class="nav-text">3-blok. «marketing va savdo» bog&#x27;lamasi qayerda sinadi</span></a>
+<a class="nav-item" href="12-umumiy-yakun-va-nima-qilish-kerak.html"><span class="nav-num">12</span><span class="nav-text">Umumiy yakun va nima qilish kerak?</span></a></nav>
+</aside>
+<main class="main">
+
+<div class="section-meta">Bo&#39;lim 10</div>
+<h1 class="section-title">2-BLOK. YO&#x27;NALISHLAR VA ODAMLAR BO&#x27;YICHA MUAMMOLAR XARITASI</h1>
+<div class="content">
+<p><strong>
+</strong></p>
+<p>Mariya (savdo bo&#x27;limi rahbari, aslida tijorat direktori)</p>
+<h3 class="h3"><strong>Что хорошо.
+</strong></h3>
+<p>Savdo bo&#x27;limi: 8 kishi. 5 ta sotuvchi (sotuvlarni yakunlaydi) va 3 ta presale (kelgan so&#x27;rovlarni saralaydi va sotuvchilarga uzatadi). Tuzilma tushunarli. Har kuni jamoa 10-15 daqiqalik yig&#x27;ilishga to&#x27;planadi.</p>
+<p>Mariya mahsulotni yaxshi biladi, mijozlar segmentlarini va ularning haqiqiy og&#x27;riqlarini biladi. Ketib qolgan mijozlar bilan o&#x27;zi 100 ta chuqur intervyu o&#x27;tkazib, ketish sabablarini aniqladi. Bizning so&#x27;rovimiz bo&#x27;yicha mijoz jalb qilish narxini (CAC, $2 945) va so&#x27;rovdan sotuvga konversiyani (2,2%) o&#x27;zi hisoblab chiqdi. Meta (Facebook va Instagram) dan kelgan so&#x27;rovlar uchun savdo skriptini ikki variantga ajratdi: biri Safety xizmati uchun (yangi boshlovchilarga transport kompaniyasini ochishda yordam), ikkinchisi ELD uchun. Diagnostika bo&#x27;yicha 10 ta vazifadan 9 tasini muddatida bajardi. Mariyaga tayanish mumkin.</p>
+<p>Отдельно про Free Trial. Free Trial (бесплатный пробный период подключения ELD) запустила Мария сама. Клиенты, которые через него проходят, подключают в среднем 6 траков. Без него 2. Пожизненная ценность таких клиентов кратно выше. Это ценное продуктовое наблюдение</p>
+<h2 class="h2"><strong>Что tanqidiy.
+</strong></h2>
+<p>Hozir Mariya aslida tijorat direktori sifatida ishlamoqda: 8 kishilik savdo bo&#x27;limini boshqaradi, marketing bilan aloqani ushlab turadi, chuqur intervyular o&#x27;tkazadi, pudratchilar bilan muzokaralar olib boradi. Shtatda marketing koordinatsiyasi bo&#x27;yicha yordamchi yo&#x27;q. Bunday yuk ostida charchash xavfi yuqori va operatsion jihatdan kompaniya bir kishiga bog&#x27;liq. Yo ikkinchi tayanch kerak (yordamchi yoki tashqi treker), yoki funksiyalarning bir qismini Mariyadan olib, jamoa bo&#x27;ylab taqsimlash kerak.</p>
+<p>Marketing va savdo hisobotlar orqali gaplashadi, maqsadlar orqali emas. Hozir Mariya marketingga aniq vazifalar qo&#x27;ymayapti. «Haftasiga shuncha so&#x27;rov kerak» degan reja yo&#x27;q, «mana shu segmentlar bo&#x27;yicha bizga so&#x27;rovlar kerak» degan so&#x27;rov yo&#x27;q, savdo ham, targetologlar ham bir xil tushunadigan «sifatli so&#x27;rov» ning kelishilgan ta&#x27;rifi yo&#x27;q. O&#x27;zaro hamkorlik oylik hisobotlar orqali boradi va bu xabardor qilish formati, qaytar aloqa emas.</p>
+<p>Mijozlar qo&#x27;llab-quvvatlash tezligi. 100 ta ketib qolgan mijoz bilan o&#x27;tkazilgan chuqur intervyular ma&#x27;lumotlariga ko&#x27;ra, 19 foizi sabab sifatida qo&#x27;llab-quvvatlash javob bermay qolishini yoki sekin javob berishini ko&#x27;rsatgan. Bu kirish bosqichidagi kontaktlarga ishlov berish tezligi muammosi bilan bir xil, u yerda issiq so&#x27;rovlarning 40-50 foiziga qo&#x27;ng&#x27;iroq qilib ulanib bo&#x27;lmaydi. Ikkala holat uchun yechim bir xil: javob tezligi normasi 5 daqiqa, kelgan so&#x27;rovlar uchun ham, mavjud mijozlar uchun ham bir xil.</p>
+<p>Aleks (Google Ads va SEO, autsorsda)</p>
+<h3 class="h3">Что хорошо.</h3>
+<p>Barqaror kanal. So&#x27;rov narxi (CPL) bir yildan ortiq vaqtdan beri $32-34 atrofida turibdi. $5 000 reklama byudjeti bilan oyiga 170 tagacha so&#x27;rov. 2025 yil uchun WordStream ning so&#x27;nggi bencmarklariga ko&#x27;ra, bu bozordan 2-3 baravar arzon: B2B uchun o&#x27;rtacha so&#x27;rov narxi $84, Business Services uchun $103, barcha sohalar bo&#x27;yicha o&#x27;rtacha $70. Aleksda maksimal darajada tozalangan semantika bor, axborot so&#x27;rovlarisiz.</p>
+<p>SEO so&#x27;nggi 10 oyda Google qidiruvidagi ko&#x27;rsatishlar soni bo&#x27;yicha 4,8 barobarga o&#x27;sdi. Aleks saytga 24/7 qo&#x27;llab-quvvatlash, ko&#x27;p tilli qo&#x27;llab-quvvatlash va Free Trial haqida eslatma qo&#x27;shdi. Yaxshilanishlarni o&#x27;zi tashabbus qiladi va ko&#x27;r nuqtalarini ochiq tan oladi (masalan, savdo bo&#x27;yicha tasavvuri yo&#x27;qligini).</p>
+<h2 class="h2"><strong>Что tanqidiy.
+</strong></h2>
+<p>Aleks autsorsda oyiga $1 000 fiks bilan ishlaydi va parallel ravishda kamida yana uchta loyihani olib boradi. Algo Group u uchun to&#x27;rt mijozdan biri. Natijadan foiz yo&#x27;q va ish formati soatlar hajmiga qurilgan.</p>
+<p>Aleks savdo bo&#x27;limidan butunlay ajratilgan. CRM ga kirish huquqi yo&#x27;q, so&#x27;rovdan to&#x27;lovga konversiyani ko&#x27;rmaydi, haqiqiy mijozlar profilini bilmaydi. Maqsadli auditoriya bo&#x27;yicha briflash olmagan.  Shu sababli sayt va reklamani raqobatchilar bo&#x27;yicha qiladi, mijozlar ma&#x27;lumotlari bo&#x27;yicha emas. Qo&#x27;ng&#x27;iroqlarni kuzatish tizimi (qaysi e&#x27;londan qo&#x27;ng&#x27;iroq kelganini ko&#x27;rsatadigan tizim) yo&#x27;q va shu sababli u qo&#x27;ng&#x27;iroqlarni reklamaga bog&#x27;lay olmaydi. Natijada kampaniyalarni so&#x27;rovlar soniga optimallashtiradi, to&#x27;lovlarga emas.</p>
+<p>Voronka tepasida u bozordan yuqori ishlaydi. Tizimning vazifasi unga voronkaning pastki qismiga (CRM, konversiyalar, qaysi shtatlarda qaysi tariflarni sotib olishadi) kirish huquqini berish va jamoaning umumiy ritmiga joylashtirish kerak. Hozir Aleks yolg&#x27;iz ishlaydi, to&#x27;rt mijozdan biri uchun va lidlari qayerga ketayotganini tushunmasdan.Из-за отсутствия сквозной аналитики, нет оптимизации рекламы на «рекламные связки, которые приносят продажи»</p>
+<p>SMM agentligi (Meta va Instagram, O&#x27;zbekistondan autsors)</p>
+<h3 class="h3">Что хорошо.</h3>
+<p>Past CPL (so&#x27;rov narxi) $8,51. UGC kreativlar (haqiqiy odamlar bilan video va foto, sahnalashtirilgan emas) ishlamoqda.  Qamrov kampaniyasi CPM (1 000 ta ko&#x27;rsatish narxi) ni $1,47 darajasida ushlab turibdi, bu AQSH uchun juda arzon.</p>
+<p>Что tanqidiy.</p>
+<p>Oyiga 70 dan ortiq so&#x27;rovdan 0 ta yopilgan sotuv. UTM teglari (so&#x27;rov yo&#x27;lini kuzatish mumkin bo&#x27;lgan havolalardagi maxsus teglar) yo&#x27;q, shuning uchun lid Telegram chatga tushgandan keyingi yo&#x27;lini kuzatish imkonsiz. Algo Group tomonidan kampaniyani hech kim boshqarmaydi: texnik topshiriq yo&#x27;q, mijozlar segmentlari bo&#x27;yicha briflash yo&#x27;q, qaysi kreativ qaysi auditoriya uchun qilingani haqida tushuncha yo&#x27;q. E&#x27;lonlar auditoriyalari kesishadi, ikki guruh o&#x27;zaro raqobatlashadi.</p>
+<p>Hozir kompaniya agentlik nima qila olsa shuni oladi, biznesga nima kerak bo&#x27;lsa, uni emas. Bu ichki egasiz autsorsdagi pudratchi bilan ishlashda tipik naqsh. Algo Group ichida hech kim agentlikning natijasi uchun javob bermaydi, agentlik faqat o&#x27;z operatsion ishi uchun javob beradi.</p>
+<p>Alimxon (CEO, egasi)</p>
+<h3 class="h3">Что хорошо.</h3>
+<h3 class="h3"><strong>Что хорошо.
+</strong></h3>
+<p>Diagnostikani Alimxon o&#x27;zi tashabbus qildi. Ahvol butunlay yomonlashishini kutmadi. Kompaniyaning tor joylariga to&#x27;g&#x27;ridan-to&#x27;g&#x27;ri qarashga tayyor, «bizda hammasi normal» degan himoyasiz. Bu allaqachon ishning yarmi. Bunday yondashuv bilan keyinchalik bashorat qilinadigan o&#x27;sish bilan tizimli marketingni qurish mumkin, ko&#x27;proq pul ko&#x27;proq sotuv beradi degan umidda reklama byudjetini quyishni davom ettirish o&#x27;rniga.</p>
+<h2 class="h2"><strong>Что tanqidiy.
+</strong></h2>
+<p>Algo Group ga o&#x27;zining shtatdagi marketologi kerak. Tashqi maslahatchi emas, autsorsdagi pudratchi emas, balki butun marketing tizimini kompaniya ichida ushlab turadigan o&#x27;z odami. У него три задачи.</p>
+<p>Birinchi: tashqaridan keladigan tavsiyalarni qabul qilish (bizdan marketing ekspertlari sifatida, Google Ads va SMM bo&#x27;yicha pudratchilardan, tadqiqotlar va auditlardan) va ularni jamoa va pudratchilar uchun aniq vazifalarga aylantirish. Hozir kiruvchi tavsiyalar yoki Mariyaning stoliga tushadi (lekin u savdoda), yoki chatlarda eriydi.</p>
+<p>Ikkinchi: marketing va savdo o&#x27;rtasida ma&#x27;lumotni ikki tomonlama uzatish. Mariyadan Aleksga va orqaga, Alimxondan jamoaga, pudratchilardan savdoga. Hozir bu butun kontur Mariyaga yopilgan va u jismonan hamma uchun almashinuv nuqtasi bo&#x27;lishga ulgurmaydi.</p>
+<p>Uchinchi: marketing va savdoning haftalik yig&#x27;ilishlari ritmini olib borish, qarorlarni qayd etish, ularning bajarilishini kuzatish. Bu ritmsiz strategik sessiyalarda qabul qilingan qarorlar operatsion ishlar bo&#x27;ylab tarqaladi va natijaga yetib bormaydi.</p>
+<p>Tashqi maslahatchi bilan ishlashda bunday shtatdagi marketolog asosiy aloqa nuqtasi bo&#x27;ladi. U tavsiyalarni qabul qiladi, ularni jamoa ichida kelishadi, pudratchilarga vazifalar qo&#x27;yadi, natija bo&#x27;yicha hisobot beradi. Usiz maslahatchi Alimxon bilan ikki haftada bir marta, Mariya bilan ikki haftada bir marta gaplashadi va bu uchrashuvlar orasida ma&#x27;lumot yo&#x27;qoladi. Har bir qo&#x27;ng&#x27;iroq kontekstni qaytadan tiklashdan boshlanadi.</p>
+<p>Bugun marketing, savdo va pudratchilar o&#x27;rtasidagi aloqa alohida odamlar orqali (asosan Mariya orqali) boradi, umumiy yig&#x27;ilishlar va umumiy hujjatlar orqali emas. Yo&#x27;l xaritasi bo&#x27;yicha ish boshlanganda, shtatdagi marketolog va tashqi marketing ekspertlari jamoada yagona butunlik sifatida harakat qilishlari kerak. Bu egasi tomonidan ochiq belgilanishi muhim: ularning birgalikdagi qarorlari Alimxonning qarorlari sifatida bajariladi. Aks holda jamoa har bir bandda yuqoridan to&#x27;g&#x27;ridan-to&#x27;g&#x27;ri buyruqni kuta boshlaydi va sur&#x27;at tezda pasayadi.</p>
+</div>
+
+<nav class="pagination">
+<a class="page-link prev" href="09-1-blok-hozirgi-nuqta-bugun-nima-bor.html"><div class="pl-label">Oldingi</div><div class="pl-title">1-BLOK. HOZIRGI NUQTA: BUGUN NIMA BOR?</div></a>
+<a class="page-link next" href="11-3-blok-marketing-va-savdo-bog-lamasi-qayerda-sinad.html"><div class="pl-label">Keyingi</div><div class="pl-title">3-BLOK. «MARKETING VA SAVDO» BOG&#x27;LAMASI QAYERDA SINADI</div></a>
+</nav>
+</main>
+</div>
+</body>
+</html>
