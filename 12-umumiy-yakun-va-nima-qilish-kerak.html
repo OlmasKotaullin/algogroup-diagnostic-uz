@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>UMUMIY YAKUN VA NIMA QILISH KERAK? — Algo Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#f97316;--accent-light:#fff7ed;--accent-border:#fed7aa;
+  --text:#0f172a;--text2:#475569;--text3:#94a3b8;
+  --border:#e2e8f0;--bg:#f8fafc;--bg-card:#ffffff;
+}
+html,body{height:100%}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);background:var(--bg);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
+a:hover{border-bottom-color:var(--accent)}
+strong{font-weight:700}
+
+.layout{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+@media (max-width:900px){.layout{grid-template-columns:1fr}}
+
+/* ── Sidebar ── */
+.sidebar{background:var(--text);color:#fff;padding:2rem 1.5rem;position:sticky;top:0;height:100vh;overflow-y:auto;max-height:100vh}
+@media (max-width:900px){.sidebar{position:relative;height:auto;max-height:none}}
+.brand{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;font-weight:600}
+.brand-name{font-size:1.6rem;font-weight:800;line-height:1.2;margin-bottom:.3rem}
+.brand-name span{color:var(--accent)}
+.brand-sub{font-size:.8rem;color:#94a3b8;margin-bottom:2rem}
+.nav{display:flex;flex-direction:column;gap:.15rem}
+.nav-item{display:flex;gap:.65rem;align-items:flex-start;padding:.65rem .85rem;border-radius:8px;color:#cbd5e1;font-size:.85rem;line-height:1.4;transition:all .15s;border-bottom:none}
+.nav-item:hover{background:rgba(255,255,255,.05);color:#fff;border-bottom:none}
+.nav-item.active{background:var(--accent);color:#fff;font-weight:600}
+.nav-num{font-family:'Fira Code',monospace;font-size:.7rem;opacity:.7;flex-shrink:0;margin-top:.15rem;min-width:1.5rem}
+.nav-text{flex:1}
+
+/* ── Main ── */
+.main{padding:3rem 3.5rem;max-width:980px}
+@media (max-width:1100px){.main{padding:2rem 1.5rem}}
+.section-meta{font-size:.78rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:.7rem;font-family:'Fira Code',monospace}
+.section-title{font-size:2.1rem;font-weight:800;line-height:1.2;color:var(--text);margin-bottom:2.5rem;letter-spacing:-.02em}
+@media (max-width:700px){.section-title{font-size:1.6rem}}
+
+/* ── Typography ── */
+.content p{margin-bottom:1.1rem;color:var(--text);font-size:1rem;line-height:1.75}
+.content h2.h2{font-size:1.45rem;font-weight:800;color:var(--text);margin:2.2rem 0 1rem;padding-left:.85rem;border-left:4px solid var(--accent);line-height:1.3}
+.content h3.h3{font-size:1.1rem;font-weight:700;color:var(--text);margin:1.6rem 0 .75rem;line-height:1.35}
+.content ul.list{margin:0 0 1.3rem 0;padding-left:0;list-style:none}
+.content ul.list li{margin-bottom:.85rem;line-height:1.75;color:var(--text)}
+
+/* ── Blockquote (цитаты Алекса/Марии и т.п.) ── */
+.content blockquote.quote{margin:1.6rem 0;padding:1.1rem 1.4rem;border-left:3px solid var(--accent);background:#fafafa;border-radius:0 6px 6px 0}
+.content blockquote.quote p{margin:0 0 .5rem 0;font-style:italic;font-size:1.05rem;color:var(--text);line-height:1.6}
+.content blockquote.quote cite{display:block;font-style:normal;font-size:.88rem;color:var(--text-muted);font-weight:500}
+
+/* ── Tables ── */
+.tbl-wrap{overflow-x:auto;margin:1.5rem 0;border-radius:8px;border:1px solid var(--border);background:#fff}
+.tbl{width:100%;border-collapse:collapse;font-size:.92rem}
+.tbl th{background:var(--bg);text-align:left;padding:.85rem 1rem;font-weight:700;color:var(--text);border-bottom:2px solid var(--border)}
+.tbl td{padding:.75rem 1rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl p{margin-bottom:.3rem}
+.tbl p:last-child{margin-bottom:0}
+
+/* ── Pagination ── */
+.pagination{display:flex;justify-content:space-between;gap:1rem;margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border)}
+.page-link{flex:1;padding:1.1rem 1.4rem;background:var(--bg-card);border:1.5px solid var(--border);border-radius:10px;text-decoration:none;border-bottom:none;color:var(--text);transition:all .15s;max-width:48%}
+.page-link:hover{border-color:var(--accent);background:var(--accent-light);border-bottom:1.5px solid var(--accent)}
+.page-link.next{margin-left:auto;text-align:right}
+.page-link .pl-label{font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:.3rem;font-family:'Fira Code',monospace}
+.page-link .pl-title{font-size:.95rem;font-weight:700;color:var(--text);line-height:1.4}
+
+/* ── Footer ── */
+.foot{padding:2rem 0 0;color:var(--text3);font-size:.78rem;text-align:center;border-top:1px solid var(--border);margin-top:4rem}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand-name">Algo <span>Group</span></div>
+  <nav class="nav"><a class="nav-item" href="index.html"><span class="nav-num">00</span><span class="nav-text">Содержание</span></a>
+<a class="nav-item" href="01-auditning-maqsadi.html"><span class="nav-num">01</span><span class="nav-text">Auditning maqsadi</span></a>
+<a class="nav-item" href="02-biz-nimalar-qildik.html"><span class="nav-num">02</span><span class="nav-text">Biz nimalar qildik</span></a>
+<a class="nav-item" href="03-aqshdagi-eld-bozori-manzarasi-algo-group-qayerda.html"><span class="nav-num">03</span><span class="nav-text">AQShdagi ELD bozori manzarasi. Algo Group qayerda</span></a>
+<a class="nav-item" href="04-strategik-oynalar-algo-group-uchun-nima-foyda-va-n.html"><span class="nav-num">04</span><span class="nav-text">Strategik oynalar. ALGO GROUP uchun nima foyda va nima qarshi ishlaydi</span></a>
+<a class="nav-item" href="05-yo-nalishlar-bo-yicha-umumiy-dashboard.html"><span class="nav-num">05</span><span class="nav-text">Yo&#x27;nalishlar bo&#x27;yicha umumiy dashboard</span></a>
+<a class="nav-item" href="06-kanallar-iqtisodiyoti.html"><span class="nav-num">06</span><span class="nav-text">Kanallar iqtisodiyoti</span></a>
+<a class="nav-item" href="07-marketing-va-sotuvning-4-blokli-auditi.html"><span class="nav-num">07</span><span class="nav-text">Marketing va sotuvning 4 blokli auditi</span></a>
+<a class="nav-item" href="08-marketingning-yetuklik-xaritasi.html"><span class="nav-num">08</span><span class="nav-text">Marketingning yetuklik xaritasi</span></a>
+<a class="nav-item" href="09-1-blok-hozirgi-nuqta-bugun-nima-bor.html"><span class="nav-num">09</span><span class="nav-text">1-blok. hozirgi nuqta: bugun nima bor?</span></a>
+<a class="nav-item" href="10-2-blok-yo-nalishlar-va-odamlar-bo-yicha-muammolar-.html"><span class="nav-num">10</span><span class="nav-text">2-blok. yo&#x27;nalishlar va odamlar bo&#x27;yicha muammolar xaritasi</span></a>
+<a class="nav-item" href="11-3-blok-marketing-va-savdo-bog-lamasi-qayerda-sinad.html"><span class="nav-num">11</span><span class="nav-text">3-blok. «marketing va savdo» bog&#x27;lamasi qayerda sinadi</span></a>
+<a class="nav-item active" href="12-umumiy-yakun-va-nima-qilish-kerak.html"><span class="nav-num">12</span><span class="nav-text">Umumiy yakun va nima qilish kerak?</span></a></nav>
+</aside>
+<main class="main">
+
+<div class="section-meta">Раздел 12</div>
+<h1 class="section-title">UMUMIY YAKUN VA NIMA QILISH KERAK?</h1>
+<div class="content">
+<h2 class="h2">1. Asosiy muammo</h2>
+<p>Algo Group marketingi bugun qora quti kabi ishlaydi. Kompaniya so&#x27;rovlar uchun to&#x27;laydi, lekin mijozlar uchun emas. Bu asosiy tushum yo&#x27;qotish manbasi. Ko&#x27;rinadigan va o&#x27;rnatilgan qonuniyatlar yo&#x27;q: byudjet o&#x27;sishi tushum o&#x27;sishiga olib kelmaydi. Tizim kengaytirib bo&#x27;lmaydigan. Маркетинг не видит, какая реклама приносит клиентов, а какая сжигает бюджеты. Продажи теряют половину лидов на этапе дозвона. Часть из-за нецелевых заявок, часть из-за скорости звонка.</p>
+<p>Shu bilan birga ikkita kuchli tayanch bor: Aleks Google Ads ni bozordan 2-3 baravar arzon qiladi, Mariyada 8 kishilik ishlaydigan jamoa bor.</p>
+<h2 class="h2">3. Tizim qayerda sinadi</h2>
+<ul class="list">
+<li>Uzlukli tahlil yo&#x27;q (qora quti).</li>
+<li>Qo&#x27;ng&#x27;iroq kuzatuvi yo&#x27;q (reklamadan kelgan qo&#x27;ng&#x27;iroqlar atribusiya qilinmaydi).</li>
+<li>Marketing tizim sifatida emas, vazifalar rejimida ishlaydi.</li>
+<li>Savdo bo&#x27;limi kerakli lidlarni na soni, na sifati bo&#x27;yicha olmayapti.</li>
+<li>«Malakali lid», «segment», «maqsadli shtat» tushunchalarining yagona ta&#x27;rifi yo&#x27;q.</li>
+<li>Lidlarning ABCD-malakalashi yo&#x27;q.</li>
+<li>Qiymatlar narvoni yo&#x27;q: faqat asosiy mahsulot, lid-magnit va tripvayer mahsulotsiz.</li>
+<li>CRM va haqiqiy arizalar mos kelmaydi (Telegram va Kommo o&#x27;rtasida tafovut).</li>
+<li>Pudratchilar yagona texnik topshiriqsiz va ko&#x27;rsatkichlarsiz mustaqil ishlaydi.</li>
+<li>Reklama, kanallar, strategiya va hisobotlarni ushlab turuvchi rahbar yo&#x27;q.</li>
+<li>Рекомендации от текущих клиентов, главный канал по числу новых клиентов в компании. По данным Марии за май 2026, через него приходит в среднем 35 человек в месяц, это 61% общего потока. Реферальные бонусы клиентам существуют, Мария лично предлагает их в разговоре: «давайте бонус для вас». Но как канал он не оформлен публично: на сайте factoreld.com программа не упоминается (для холодного посетителя её не видно). То есть канал, который даёт большую часть новых клиентов, пока работает непрозрачно<strong>
+</strong></li>
+</ul>
+<h2 class="h2">4. Tub sabab</h2>
+<p>Marketing va savdoni boshqarishning yagona markazi yo&#x27;q. Jarayon odamlarda turibdi (Mariya hammasini yolg&#x27;iz tortadi, Aleks o&#x27;z holicha ishlaydi), tizimda emas.</p>
+<h2 class="h2">5. Xavflar</h2>
+<p>Agar hamma narsa qanday bo&#x27;lsa, shundayligicha qoldirilsa:</p>
+<ul class="list">
+<li>CAC o&#x27;sishda davom etadi, birlik iqtisodiyoti chuqurroq minusga ketadi.</li>
+<li>ELD bozoridagi raqobatchilar Google ga oyiga 100 000 dollargacha sarflaydi. Optimallashtirishsiz Algo byudjet poygasida yutqazadi.</li>
+<li>Mariya ikki tomonlama yuk (savdo va marketing muvofiqlashtirishi) tufayli charchab qoladi.</li>
+<li>Aleks «ko&#x27;r» bo&#x27;lib qoladi va savdoga emas, CPL ga moslab optimallashtiradi.</li>
+<li>Meta konversiyasiz byudjetni sarflashda davom etadi.</li>
+<li>19% oldini olish mumkin bo&#x27;lgan mijozlar oqimi saqlanib qoladi.</li>
+</ul>
+<h2 class="h2">6. Nima qilish kerak.</h2>
+<p>1) Починить дозвон. SLA 5 минут, power dialer (программа автонабора номеров для пресейлов), автоматический follow-up через SMS и email, 6-8 попыток дозвона в разное время суток.</p>
+<p>2) Uchidan-uchiga analitika Roistat yoki shunga o&#x27;xshashni joriy qilish. Qo&#x27;ng&#x27;iroqlarni kuzatish, CRM va reklama bitta tizimda.</p>
+<p>3) Дать глубокий брифинг Алексу и SMM. Сегменты, ICP, цены, Aha Moment, реальные боли клиентов из CustDev.</p>
+<p>4) Поставить еженедельные синки маркетинг и продажи. Не ежемесячные отчёты. ЦКП у каждого отдела.</p>
+<p>5) Reklamani segmentlash: 3 ta kampaniya, 3 ta lending, 3 ta xabar. Local / Regional / OTR.</p>
+<p>6) Meta ni tuzatish. UTM, auditoriyalar kesishuvi, kreativlarni qo&#x27;shimcha sinash. Agar 2 oyda natija bermasa, byudjetni Telegram hamjamiyatlari va YouTube blogerlariga yo&#x27;naltirish.</p>
+<p>7) So&#x27;rovlarni Telegramdan CRM ga yagona haqiqat manbasi sifatida o&#x27;tkazish.</p>
+<p>8) Asosiy raqobatdosh ustunlikni o&#x27;rash.</p>
+<p>Запустить системную реферальную программу. 15-20% recurring commission (регулярная выплата процента партнёру от платежей приведённого клиента) на 12-24 месяца для клиентов, 10-15% для диспетчеров и факторинговых партнёров. Shaxsiy kabinetda shaffof dashboard. WhatsApp va Telegramda yuborish uchun andozalar. Faol bo&#x27;lmagan baza reaktivatsiyasi (taxminan 100 ta kompaniya) «har bir taklif qilingan do&#x27;st uchun 1 oy bepul» degan referal bonus bilan. Рефералы это 61% потока новых клиентов компании, сейчас канал работает без программы.</p>
+<p>Qo&#x27;shimcha. Lidlarning ABCD bo&#x27;yicha tasniflashini joriy qilish. Qiymatlar zinapoyasini qurish.</p>
+<p>Лидов правильно делить по системе ABCD. Классификация идёт по ценности лида, то есть по тому, какой тариф он потенциально берёт. Не по готовности купить прямо сейчас. Это другая ось.</p>
+<h3 class="h3"><strong>Qiymat bo&#x27;yicha segmentlar:
+</strong></h3>
+<p><strong>A, darhol maksimal paketga kiruvchi mijozlar. Algo Group da bu OTR segmenti (Over-the-Road, kunda 500+ mil uzoq masofali tashish), tarif oyiga trak uchun $109-199.</strong> Moslashuvchan ish soatlari xizmatini va 24/7 qo&#x27;llab-quvvatlashni oladi. Byudjet imkon beradi.</p>
+<p>B, o&#x27;rtacha paketdagi mijozlar. Regional segmenti (kunda 150-500 mil mintaqaviy tashish), tarif $50-79. Premium funksiyalarsiz bazaviy ELD ni oladi.</p>
+<p>C, bazaviy tarifdagi mijozlar. Local segmenti (kunda 150 milgacha mahalliy tashish), tarif $29. Minimal funksiyalar, asosan IFTA (shtatlararo yoqilg&#x27;i solig&#x27;i) hisobi uchun.</p>
+<p>D, og&#x27;ir lidlar. Paketlar o&#x27;rtasida ikkilanadi, ko&#x27;p savollar beradi, presale lar vaqtini oladi. Natijada sotib olmasligi ham mumkin.</p>
+<p>Bu segmentlarning har biriga alohida harorat qo&#x27;yiladi: lid hoziroq sotib olishga qanchalik tayyor. Issiq, iliq, sovuq. 4 ga 3 matritsa hosil bo&#x27;ladi. Например, сегмент A (потенциально премиум) может быть холодным, если человек только открыл компанию и пока не выезжал на маршруты, ELD ему понадобится через несколько месяцев. И наоборот, сегмент C (базовый тариф 29 долларов) может прийти горячим, если водителю срочно нужен ELD по требованию инспектора DOT (Department of Transportation, дорожная инспекция США).</p>
+<p>Algo Group da kiruvchi lidlarni saralovchi presale lar (3 kishi) bor. Lekin qiymat bo&#x27;yicha har bir segment uchun turli skriptlar va harorat bilan ishlash reglamenti bo&#x27;lgan ABCD tizimining o&#x27;zi yo&#x27;q. С холодным лидом на 29 долларов работают тем же скриптом и тратят столько же времени, сколько на горячего лида на 199 долларов. Из-за этого пресейлы тратят одинаковые ресурсы на сделки разной ценности, и сегмент D (тяжёлые) забирает непропорционально много времени без понятного результата.</p>
+<p>Shtatdagi marketologsiz yo&#x27;l xaritasi uzoq muddatda ishlamaydi</p>
+<p>Yo&#x27;l xaritasining barcha olti bosqichi Algo Group ichida o&#x27;zining shtatdagi marketologi bo&#x27;lishini talab qiladi. Usiz tizimni ishga tushirish mumkin, lekin uni masofada ushlab turib bo&#x27;lmaydi. Sababini tushuntiraman.</p>
+<p>Doimiy marketolog uchta vazifani bajaradi, ularni na pudratchiga, na tashqi konsultantga, na egasiga topshirib bo&#x27;lmaydi.</p>
+<p>Birinchisi. U ritmni ushlab turadi. Har dushanba RNP yig&#x27;ilishi o&#x27;tkazilishi shart, Alimxon xizmat safarida ekanmi yoki yo&#x27;qmi, Mariya ulgurdimi yoki yo&#x27;qmi, bundan qat&#x27;i nazar. Bu ritmni kompaniya ichidan ushlab turadigan odam bo&#x27;lmasa, muntazam boshqaruv bir oyda parchalanib ketadi.</p>
+<p>Ikkinchisi. U bizdan trekerlar sifatida, pudratchilardan, Roistat boshqaruv panellaridan va tadqiqotlardan keladigan tavsiyalar oqimini qabul qiladi va ularni jamoa uchun aniq vazifalarga aylantiradi. Usiz tavsiyalar chatlarda erib ketadi va natijaga yetib bormaydi.</p>
+<p>Uchinchisi. U pudratchilarning operatsion buyurtmachisiga aylanadi. Pudratchi kompaniya ichida malakali bir aniq kontakt bo&#x27;lgan joyda yaxshi ishlaydi. Doimiy marketolog bo&#x27;lmasa, Aleks o&#x27;z tushunchasi bo&#x27;yicha, SMM agentligi o&#x27;z tushunchasi bo&#x27;yicha, yangi pudratchilar (Telegram tarqatish, Telegram ADS) ham har biri o&#x27;z yo&#x27;liga ketadi. Umumiy maqsadsiz parallel oqimlar paydo bo&#x27;ladi.</p>
+<p>Umuman shtatdagi marketologsiz bo&#x27;lish mumkinmi? Ha. Algo Group bir necha yildan beri usiz ishlamoqda va 700 ta faol mijozni ushlab turibdi. Bu ishlaydigan ssenariy, ko&#x27;p kompaniyalar yillar davomida bunday yashaydi. Но для масштабируемого и предсказуемого роста, который сейчас ставит собственник, штатный маркетолог обязателен. Вопрос не «нужен или не нужен», а «когда нанимаем». До запуска этапа 1 или вместе с ним.</p>
+<p>Yo&#x27;l xaritasiga o&#x27;tamiz.</p>
+</div>
+
+<nav class="pagination">
+<a class="page-link prev" href="11-3-blok-marketing-va-savdo-bog-lamasi-qayerda-sinad.html"><div class="pl-label">← Назад</div><div class="pl-title">3-BLOK. «MARKETING VA SAVDO» BOG&#x27;LAMASI QAYERDA SINADI</div></a>
+</nav>
+</main>
+</div>
+</body>
+</html>
